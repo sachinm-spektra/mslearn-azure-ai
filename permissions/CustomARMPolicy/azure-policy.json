@@ -1,0 +1,94 @@
+{
+  "properties": {
+    "displayName": "Agent Tool Backend Sandbox Policy",
+    "policyType": "Custom",
+    "mode": "All",
+    "parameters": {
+      "allowedLocations": {
+        "type": "Array",
+        "metadata": {
+          "displayName": "Allowed locations",
+          "description": "Allowed Azure regions for this beginner PostgreSQL agent backend lab."
+        },
+        "defaultValue": [
+          "eastus",
+          "eastus2",
+          "centralus",
+          "westus2"
+        ]
+      },
+      "allowedVmSkus": {
+        "type": "Array",
+        "metadata": {
+          "displayName": "Allowed VM SKUs",
+          "description": "Cost-conscious VM sizes for the lab VM."
+        },
+        "defaultValue": [
+          "Standard_B2s",
+          "Standard_B2ms"
+        ]
+      },
+      "allowedStorageSkus": {
+        "type": "Array",
+        "metadata": {
+          "displayName": "Allowed storage account SKUs",
+          "description": "Restrict storage accounts to locally redundant options for lab cost control."
+        },
+        "defaultValue": [
+          "Standard_LRS",
+          "Standard_GRS",
+          "Standard_ZRS"
+        ]
+      }
+    },
+    "policyRule": {
+      "if": {
+        "anyOf": [
+          {
+            "allOf": [
+              {
+                "field": "type",
+                "equals": "Microsoft.Compute/virtualMachines"
+              },
+              {
+                "not": {
+                  "field": "Microsoft.Compute/virtualMachines/sku.name",
+                  "in": "[parameters('allowedVmSkus')]"
+                }
+              }
+            ]
+          },
+          {
+            "allOf": [
+              {
+                "field": "type",
+                "equals": "Microsoft.Storage/storageAccounts"
+              },
+              {
+                "not": {
+                  "field": "Microsoft.Storage/storageAccounts/sku.name",
+                  "in": "[parameters('allowedStorageSkus')]"
+                }
+              }
+            ]
+          },
+          {
+            "allOf": [
+              {
+                "field": "type",
+                "notEquals": "Microsoft.Resources/resourceGroups"
+              },
+              {
+                "field": "location",
+                "notIn": "[parameters('allowedLocations')]"
+              }
+            ]
+          }
+        ]
+      },
+      "then": {
+        "effect": "deny"
+      }
+    }
+  }
+}
