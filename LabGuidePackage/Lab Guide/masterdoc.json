@@ -1,0 +1,13 @@
+[
+  {
+    "Name": "AI-200 Lab 12: Build an agent tool backend on Azure Database for PostgreSQL",
+    "Language": "English",
+    "BaseURL": "https://raw.githubusercontent.com/sachinm-spektra/mslearn-azure-ai/main/LabGuidePackage/Lab%20Guide/",
+    "Files": [
+      {
+        "RawFilePath": "Lab%20Guide/Exercise-01.md",
+        "Order": 1
+      }
+    ]
+  }
+]

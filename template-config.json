@@ -1,0 +1,12 @@
+{
+  "name": "AI-200 Lab 12: Build an agent tool backend on Azure Database for PostgreSQL",
+  "cloud": "azure",
+  "level": "Beginner",
+  "deploymentDurationMinutes": 30,
+  "enableLabValidation": false,
+  "hasInlineQuestions": false,
+  "customPolicy": true,
+  "customRbacRole": true,
+  "cloudScope": null,
+  "policyPack": null
+}
